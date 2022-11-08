@@ -175,6 +175,13 @@ function multiply(a,b){
 }
 
 function divide(a,b){
+    if(b==0){
+        alert("Hey!!!! You can't do that!");
+        numShowing = 0;
+        space.innerHTML=numShowing;
+        clear();
+        return 0;
+    }
     return a/b;
 }
 
