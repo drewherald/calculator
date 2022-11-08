@@ -2,6 +2,7 @@ let numShowing = 0;
 let opCounter = 0;
 let numHold = 0;
 let op = " ";
+let first = true;
 
 let total = document.createTextNode(numShowing);
 let space = document.querySelector(".total");
@@ -55,7 +56,18 @@ document.querySelector("#plus").addEventListener("click", function(){
         op = "+";
         numShowing = 0;
         space.innerHTML=numShowing;
+        first = false;
+    } else{
+        console.log(numHold);
+        console.log(numShowing);
+        numShowing = operate(numHold,numShowing,op);
+        space.innerHTML=numShowing;
+        numHold = numShowing;
+        console.log(numHold);
+        first = false;
+        op = "+";
     }
+    
 });
 
 document.querySelector("#minus").addEventListener("click", function(){
@@ -65,6 +77,16 @@ document.querySelector("#minus").addEventListener("click", function(){
         op = "-";
         numShowing = 0;
         space.innerHTML=numShowing;
+        first = false;
+    } else{
+        console.log(numHold);
+        console.log(numShowing);
+        numShowing = operate(numHold,numShowing,op);
+        space.innerHTML=numShowing;
+        numHold = numShowing;
+        console.log(numHold);
+        first = false;
+        op = "-";
     }
 });
 
@@ -75,6 +97,16 @@ document.querySelector("#mult").addEventListener("click", function(){
         op = "*";
         numShowing = 0;
         space.innerHTML=numShowing;
+        first = false;
+    } else{
+        console.log(numHold);
+        console.log(numShowing);
+        numShowing = operate(numHold,numShowing,op);
+        space.innerHTML=numShowing;
+        numHold = numShowing;
+        console.log(numHold);
+        first = false;
+        op = "*";
     }
 });
 
@@ -85,14 +117,25 @@ document.querySelector("#div").addEventListener("click", function(){
         op = "/";
         numShowing = 0;
         space.innerHTML=numShowing;
+        first = false;
+    } else{
+        console.log(numHold);
+        console.log(numShowing);
+        numShowing = operate(numHold,numShowing,op);
+        space.innerHTML=numShowing;
+        numHold = numShowing;
+        console.log(numHold);
+        first = false;
+        op = "/";
     }
 });
 
 document.querySelector("#equals").addEventListener("click", function(){
-    if(opCounter==1){
+    if(opCounter>0){
         numShowing = operate(numHold,numShowing,op);
         space.innerHTML=numShowing;
         opCounter = 0;
+        first = true;
     } 
 });
 
@@ -102,9 +145,21 @@ document.querySelector("#clear").addEventListener("click", function(){
 
 
 function changeNum(number){
-    numShowing = parseInt(`${space.textContent}${number}`,10);
-    total = document.createTextNode(numShowing);
-    space.innerHTML=numShowing;
+    console.log(first);
+    if(first){
+        numShowing = parseInt(`${space.textContent}${number}`,10);
+        total = document.createTextNode(numShowing);
+        space.innerHTML=numShowing;
+    }else{
+        numShowing = 0;
+        total = document.createTextNode(numShowing);
+        space.innerHTML=numShowing;
+        numShowing = parseInt(`${space.textContent}${number}`,10);
+        total = document.createTextNode(numShowing);
+        space.innerHTML=numShowing;
+        first = true;
+    }
+    
 }
 
 function add(a,b){
@@ -143,5 +198,7 @@ function clear(){
     space.innerHTML=numShowing;
     opCounter = 0;
     op = " ";
+    first = true;
+    numHold = 0;
 }
 
