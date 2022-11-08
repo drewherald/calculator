@@ -49,21 +49,128 @@ document.querySelector("#nine").addEventListener("click", function(){
     changeNum("9")
 });
 
+document.addEventListener('keyup', (event) => {
+    const keyName = event.key;
+    console.log(keyName);
+    if(keyName==="0"){
+        changeNum("0");
+    }
+    if(keyName==="1"){
+        changeNum("1");
+    }
+    if(keyName==="2"){
+        changeNum("2");
+    }
+    if(keyName==="3"){
+        changeNum("3");
+    }
+    if(keyName==="4"){
+        changeNum("4");
+    }
+    if(keyName==="5"){
+        changeNum("5");
+    }
+    if(keyName==="6"){
+        changeNum("6");
+    }
+    if(keyName==="7"){
+        changeNum("7");
+    }
+    if(keyName==="8"){
+        changeNum("8");
+    }
+    if(keyName==="9"){
+        changeNum("9");
+    }
+    if(keyName==="+"){
+        if(opCounter==0){
+            numHold = numShowing;
+            opCounter = 1;
+            op = "+";
+            numShowing = 0;
+            first = false;
+        } else{
+            numShowing = operate(numHold,numShowing,op);
+            space.innerHTML=numShowing;
+            numHold = numShowing;
+            console.log(numHold);
+            first = false;
+            op = "+";
+        }
+    }
+    if(keyName==="-"){
+        if(opCounter==0){
+            numHold = numShowing;
+            opCounter = 1;
+            op = "-";
+            numShowing = 0;
+            first = false;
+        } else{
+            numShowing = operate(numHold,numShowing,op);
+            space.innerHTML=numShowing;
+            numHold = numShowing;
+            console.log(numHold);
+            first = false;
+            op = "-";
+        }
+    }
+    if(keyName==="*"){
+        if(opCounter==0){
+            numHold = numShowing;
+            opCounter = 1;
+            op = "*";
+            numShowing = 0;
+            first = false;
+        } else{
+            numShowing = operate(numHold,numShowing,op);
+            space.innerHTML=numShowing;
+            numHold = numShowing;
+            console.log(numHold);
+            first = false;
+            op = "*";
+        }
+    }
+    if(keyName==="/"){
+        if(opCounter==0){
+            numHold = numShowing;
+            opCounter = 1;
+            op = "/";
+            numShowing = 0;
+            first = false;
+        } else{
+            numShowing = operate(numHold,numShowing,op);
+            space.innerHTML=numShowing;
+            numHold = numShowing;
+            console.log(numHold);
+            first = false;
+            op = "/";
+        }
+    }
+    if(keyName==="Enter"){
+        if(opCounter>0){
+            numShowing = operate(numHold,numShowing,op);
+            space.innerHTML=numShowing;
+            opCounter = 0;
+            first = true;
+        } 
+    }
+    if(keyName==="Escape"){
+        clear();
+    }
+});
+
+
 document.querySelector("#plus").addEventListener("click", function(){
     if(opCounter==0){
         numHold = numShowing;
         opCounter = 1;
         op = "+";
         numShowing = 0;
-        space.innerHTML=numShowing;
         first = false;
     } else{
-        console.log(numHold);
-        console.log(numShowing);
         numShowing = operate(numHold,numShowing,op);
         space.innerHTML=numShowing;
         numHold = numShowing;
-        console.log(numHold);
         first = false;
         op = "+";
     }
@@ -76,11 +183,8 @@ document.querySelector("#minus").addEventListener("click", function(){
         opCounter = 1;
         op = "-";
         numShowing = 0;
-        space.innerHTML=numShowing;
         first = false;
     } else{
-        console.log(numHold);
-        console.log(numShowing);
         numShowing = operate(numHold,numShowing,op);
         space.innerHTML=numShowing;
         numHold = numShowing;
@@ -96,11 +200,8 @@ document.querySelector("#mult").addEventListener("click", function(){
         opCounter = 1;
         op = "*";
         numShowing = 0;
-        space.innerHTML=numShowing;
         first = false;
     } else{
-        console.log(numHold);
-        console.log(numShowing);
         numShowing = operate(numHold,numShowing,op);
         space.innerHTML=numShowing;
         numHold = numShowing;
@@ -116,15 +217,11 @@ document.querySelector("#div").addEventListener("click", function(){
         opCounter = 1;
         op = "/";
         numShowing = 0;
-        space.innerHTML=numShowing;
         first = false;
     } else{
-        console.log(numHold);
-        console.log(numShowing);
         numShowing = operate(numHold,numShowing,op);
         space.innerHTML=numShowing;
         numHold = numShowing;
-        console.log(numHold);
         first = false;
         op = "/";
     }
@@ -145,7 +242,6 @@ document.querySelector("#clear").addEventListener("click", function(){
 
 
 function changeNum(number){
-    console.log(first);
     if(first){
         numShowing = parseInt(`${space.textContent}${number}`,10);
         total = document.createTextNode(numShowing);
@@ -196,7 +292,7 @@ function operate(a,b,operator){
         return multiply(a,b);
     }
     if(operator == "/"){
-        return divide(a,b);
+        return Math.round(divide(a,b)*100)/100;
     }
 }
 

@@ -8,6 +8,7 @@
     margin-top: 2%;
 }
 
+
 .container{
     display: flex;
     justify-content: space-evenly;
@@ -24,8 +25,14 @@ button{
    width:100px;
    cursor:pointer;
    border: 1px outset white;
-   margin-bottom: 2%;
+   margin-bottom: 1%;
    
+}
+
+button:hover{
+    background-color: cornflowerblue;
+    font-weight: bold;
+    font-size: 10pt;
 }
 
 #space{
