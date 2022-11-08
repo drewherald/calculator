@@ -1,4 +1,7 @@
 let numShowing = 0;
+let opCounter = 0;
+let numHold = 0;
+let op = " ";
 
 let total = document.createTextNode(numShowing);
 let space = document.querySelector(".total");
@@ -45,10 +48,49 @@ document.querySelector("#nine").addEventListener("click", function(){
     changeNum("9")
 });
 
+document.querySelector("#plus").addEventListener("click", function(){
+    if(opCounter==0){
+        numHold = numShowing;
+        opCounter = 1;
+        op = "+";
+        numShowing = 0;
+        space.innerHTML=numShowing;
+    }
+});
+
+document.querySelector("#minus").addEventListener("click", function(){
+    if(opCounter==0){
+        numHold = numShowing;
+        opCounter = 1;
+        op = "-";
+        numShowing = 0;
+        space.innerHTML=numShowing;
+    }
+});
+
+document.querySelector("#mult").addEventListener("click", function(){
+});
+
+document.querySelector("#div").addEventListener("click", function(){
+});
+
+document.querySelector("#equals").addEventListener("click", function(){
+    if(opCounter==1){
+        numShowing = operate(numHold,numShowing,op);
+        space.innerHTML=numShowing;
+        opCounter = 0;
+    } 
+});
+
+document.querySelector("#clear").addEventListener("click", function(){
+    clear();
+});
+
 
 function changeNum(number){
-    total = document.createTextNode(number);
-    space.appendChild(total);
+    numShowing = parseInt(`${space.textContent}${number}`,10);
+    total = document.createTextNode(numShowing);
+    space.innerHTML=numShowing;
 }
 
 function add(a,b){
@@ -72,13 +114,20 @@ function operate(a,b,operator){
         return add(a,b);
     }
     if(operator == "-"){
-        return add(a,b);
+        return subtract(a,b);
     }
     if(operator == "*"){
-        return add(a,b);
+        return multiply(a,b);
     }
     if(operator == "/"){
-        return add(a,b);
+        return divide(a,b);
     }
+}
+
+function clear(){
+    numShowing = 0;
+    space.innerHTML=numShowing;
+    opCounter = 0;
+    op = " ";
 }
 
