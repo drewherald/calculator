@@ -69,9 +69,23 @@ document.querySelector("#minus").addEventListener("click", function(){
 });
 
 document.querySelector("#mult").addEventListener("click", function(){
+    if(opCounter==0){
+        numHold = numShowing;
+        opCounter = 1;
+        op = "*";
+        numShowing = 0;
+        space.innerHTML=numShowing;
+    }
 });
 
 document.querySelector("#div").addEventListener("click", function(){
+    if(opCounter==0){
+        numHold = numShowing;
+        opCounter = 1;
+        op = "/";
+        numShowing = 0;
+        space.innerHTML=numShowing;
+    }
 });
 
 document.querySelector("#equals").addEventListener("click", function(){
